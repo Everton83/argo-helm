@@ -27,7 +27,7 @@ openshift:
 ## Custom resource configuration
 crds:
   # -- Install and upgrade CRDs
-  install: true
+  install: false
   # -- Keep CRDs on chart uninstall
   keep: true
   # -- Annotations to be added to all CRDs
@@ -1459,7 +1459,7 @@ redis:
 # Ref: https://github.com/DandyDeveloper/charts/blob/master/charts/redis-ha/values.yaml
 redis-ha:
   # -- Enables the Redis HA subchart and disables the custom Redis single node deployment
-  enabled: false
+  enabled: true
   ## Redis image
   image:
     # -- Redis repository
@@ -1561,7 +1561,7 @@ server:
   name: server
 
   # -- The number of server pods to run
-  replicas: 1
+  replicas: 3
 
   ## Argo CD server Horizontal Pod Autoscaler
   autoscaling:
@@ -2200,7 +2200,7 @@ repoServer:
   name: repo-server
 
   # -- The number of repo server pods to run
-  replicas: 1
+  replicas: 2
 
   ## Repo server Horizontal Pod Autoscaler
   autoscaling:
@@ -2371,13 +2371,13 @@ repoServer:
   podLabels: {}
 
   # -- Resource limits and requests for the repo server pods
-  resources: {}
-  #  limits:
-  #    cpu: 50m
-  #    memory: 128Mi
-  #  requests:
-  #    cpu: 10m
-  #    memory: 64Mi
+  resources: 
+    limits:
+      cpu: 50m
+      memory: 128Mi
+    requests:
+      cpu: 10m
+      memory: 64Mi
 
   # Repo server container ports
   containerPorts:
@@ -2868,7 +2868,7 @@ applicationSet:
   ## Ref: https://argocd-applicationset.readthedocs.io/en/master/Generators-Git/#webhook-configuration)
   ingress:
     # -- Enable an ingress resource for ApplicationSet webhook
-    enabled: false
+    enabled: true
     # -- Additional ingress labels
     labels: {}
     # -- Additional ingress annotations
@@ -2882,7 +2882,8 @@ applicationSet:
     hostname: ""
 
     # -- List of ingress paths
-    path: /api/webhook
+    #path: /api/webhook
+    path: /
 
     # -- Ingress path type. One of `Exact`, `Prefix` or `ImplementationSpecific`
     pathType: Prefix
@@ -2940,7 +2941,7 @@ notifications:
 
   # -- Argo CD dashboard url; used in place of {{.context.argocdUrl}} in templates
   # @default -- `""` (defaults to https://`global.domain`)
-  argocdUrl: ""
+  argocdUrl: "meu-argocd.labston.com.br"
 
   ## Notifications controller Pod Disruption Budget
   ## Ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
