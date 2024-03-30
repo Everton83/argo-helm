@@ -27,7 +27,7 @@ openshift:
 ## Custom resource configuration
 crds:
   # -- Install and upgrade CRDs
-  install: false
+  install: true
   # -- Keep CRDs on chart uninstall
   keep: true
   # -- Annotations to be added to all CRDs
@@ -956,13 +956,13 @@ dex:
     imagePullPolicy: ""
     # -- Argo CD init image resources
     # @default -- `{}` (defaults to dex.resources)
-    resources: {}
-    #  requests:
-    #    cpu: 5m
-    #    memory: 96Mi
-    #  limits:
-    #    cpu: 10m
-    #    memory: 144Mi
+    resources: 
+      requests:
+        cpu: 5m
+        memory: 96Mi
+      limits:
+        cpu: 10m
+        memory: 144Mi
 
   # -- Environment variables to pass to the Dex server
   env: []
@@ -1159,7 +1159,7 @@ dex:
 ## Redis
 redis:
   # -- Enable redis
-  enabled: false
+  enabled: true
   # -- Redis name
   name: redis
 
@@ -1247,13 +1247,13 @@ redis:
       failureThreshold: 5
 
     # -- Resource limits and requests for redis-exporter sidecar
-    resources: {}
-      # limits:
-      #   cpu: 50m
-      #   memory: 64Mi
-      # requests:
-      #   cpu: 10m
-      #   memory: 32Mi
+    resources: 
+       limits:
+         cpu: 50m
+         memory: 64Mi
+       requests:
+         cpu: 10m
+         memory: 32Mi
 
   # -- Secrets with credentials to pull images from a private registry
   # @default -- `[]` (defaults to global.imagePullSecrets)
@@ -1561,7 +1561,7 @@ server:
   name: server
 
   # -- The number of server pods to run
-  replicas: 3
+  replicas: 1
 
   ## Argo CD server Horizontal Pod Autoscaler
   autoscaling:
@@ -1570,7 +1570,7 @@ server:
     # -- Minimum number of replicas for the Argo CD server [HPA]
     minReplicas: 1
     # -- Maximum number of replicas for the Argo CD server [HPA]
-    maxReplicas: 5
+    maxReplicas: 1
     # -- Average CPU utilization percentage for the Argo CD server [HPA]
     targetCPUUtilizationPercentage: 50
     # -- Average memory utilization percentage for the Argo CD server [HPA]
@@ -1686,13 +1686,13 @@ server:
         - ALL
 
     # -- Resource limits and requests for the argocd-extensions container
-    resources: {}
-    #  limits:
-    #    cpu: 50m
-    #    memory: 128Mi
-    #  requests:
-    #    cpu: 10m
-    #    memory: 64Mi
+    resources: 
+      limits:
+        cpu: 50m
+        memory: 128Mi
+      requests:
+        cpu: 10m
+        memory: 64Mi
 
   # -- Additional containers to be added to the server pod
   ## Note: Supports use of custom Helm templates
@@ -1754,13 +1754,13 @@ server:
   podLabels: {}
 
   # -- Resource limits and requests for the Argo CD server
-  resources: {}
-  #  limits:
-  #    cpu: 100m
-  #    memory: 128Mi
-  #  requests:
-  #    cpu: 50m
-  #    memory: 64Mi
+  resources: 
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
 
   # Server container ports
   containerPorts:
@@ -1916,7 +1916,7 @@ server:
     # -- Server service labels
     labels: {}
     # -- Server service type
-    type: LoadBalancer
+    type: ClusterIP
     # -- Server service http port for NodePort service type (only if `server.service.type` is set to "NodePort")
     nodePortHttp: 30080
     # -- Server service https port for NodePort service type (only if `server.service.type` is set to "NodePort")
@@ -2081,7 +2081,7 @@ server:
       ## Can be of type NodePort or ClusterIP depending on which mode you are running.
       ## Instance mode needs type NodePort, IP mode needs type ClusterIP
       ## Ref: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/how-it-works/#ingress-traffic
-      serviceType: NodePort
+      serviceType: ClusterIP
 
     # Google specific options for Google Application Load Balancer
     # Applies only when `server.ingress.controller` is set to `gke`
@@ -2199,7 +2199,7 @@ repoServer:
   name: repo-server
 
   # -- The number of repo server pods to run
-  replicas: 2
+  replicas: 1
 
   ## Repo server Horizontal Pod Autoscaler
   autoscaling:
@@ -2208,7 +2208,7 @@ repoServer:
     # -- Minimum number of replicas for the repo server [HPA]
     minReplicas: 1
     # -- Maximum number of replicas for the repo server [HPA]
-    maxReplicas: 5
+    maxReplicas: 1
     # -- Average CPU utilization percentage for the repo server [HPA]
     targetCPUUtilizationPercentage: 50
     # -- Average memory utilization percentage for the repo server [HPA]
@@ -2372,11 +2372,11 @@ repoServer:
   # -- Resource limits and requests for the repo server pods
   resources: 
     limits:
-      cpu: 50m
-      memory: 128Mi
+      cpu: 100m
+      memory: 256Mi
     requests:
-      cpu: 10m
-      memory: 64Mi
+     cpu: 50m
+     memory: 128Mi
 
   # Repo server container ports
   containerPorts:
@@ -2723,12 +2723,12 @@ applicationSet:
 
   # -- Resource limits and requests for the ApplicationSet controller pods.
   resources: {}
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
+  #   limits:
+  #     cpu: 100m
+  #     memory: 128Mi
+  #   requests:
+  #    cpu: 100m
+  #    memory: 128Mi
 
   # ApplicationSet controller container ports
   containerPorts:
@@ -3100,13 +3100,13 @@ notifications:
   podLabels: {}
 
   # -- Resource limits and requests for the notifications controller
-  #resources: 
-  #   limits:
-  #     cpu: 100m
-  #     memory: 128Mi
-  #   requests:
-  #     cpu: 100m
-  #     memory: 128Mi
+  resources: 
+     limits:
+       cpu: 100m
+       memory: 128Mi
+     requests:
+       cpu: 100m
+       memory: 128Mi
 
   # Notification controller container ports
   containerPorts:
