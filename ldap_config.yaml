@@ -1,0 +1,26 @@
+
+server:
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+  config:
+    dex.config: |
+      connectors:
+     - type: ldap
+        name: LDAP
+        id: lda
+        config:
+          host: "x.x.x.x:389"
+          insecureNoSSL: false
+          insecureSkipVerify: true
+          bindDN: "CN=Argo CD,OU=xxx,OU=xxx,OU=xxx,DC=xxxx,DC=xxx"
+          bindPW: "xxxxxx"
+          usernamePrompt: xxxxxx
+          userSearch:
+            baseDN: "dc=xxxx,dc=xxx"
+            filter: "(sAMAccountName=%s)"
+            username: sAMAccountName
+            idAttr: distinguishedName
+            emailAttr: mail
+            nameAttr: displayName
+  
