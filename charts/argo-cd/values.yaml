@@ -2013,7 +2013,8 @@ server:
        nginx.ingress.kubernetes.io/ssl-passthrough: "true"
 
     # -- Defines which ingress controller will implement the resource
-    ingressClassName: "nginx"
+    #ingressClassName: "nginx"
+    ingressClassName: "traefik"
 
     # -- Argo CD server hostname
     # @default -- `""` (defaults to global.domain)
@@ -2122,7 +2123,8 @@ server:
     annotations: {}    # -- Additional ingress labels for dedicated [gRPC-ingress]
     labels: {}
     # -- Defines which ingress controller will implement the resource [gRPC-ingress]
-    ingressClassName: "nginx"
+    #ingressClassName: "nginx"
+    ingressClassName: "traefik"
 
     # -- Argo CD server hostname for dedicated [gRPC-ingress]
     # @default -- `""` (defaults to grpc.`server.ingress.hostname`)
