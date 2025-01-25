@@ -266,7 +266,7 @@ configs:
     ## List of additional namespaces where applications may be created in and reconciled from.
     ## The namespace where Argo CD is installed to will always be allowed.
     ## Set comma-separated list. (e.g. app-team-one, app-team-two)
-    application.namespaces: ""
+    #application.namespaces: ""
 
   # Argo CD RBAC policy configuration
   ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md
@@ -815,7 +815,7 @@ controller:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: "" # "monitoring"
+      #namespace: "" # "monitoring"
       # -- Prometheus ServiceMonitor labels
       additionalLabels: {}
       # -- Prometheus ServiceMonitor annotations
@@ -824,7 +824,7 @@ controller:
       # -- Deploy a PrometheusRule for the application controller
       enabled: false
       # -- PrometheusRule namespace
-      namespace: "" # "monitoring"
+      #namespace: "" # "monitoring"
       # -- PrometheusRule selector
       selector: {}
         # prometheus: kube-prometheus
@@ -907,7 +907,7 @@ dex:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: "" # "monitoring"
+      #namespace: "" # "monitoring"
       # -- Prometheus ServiceMonitor labels
       additionalLabels: {}
       # -- Prometheus ServiceMonitor annotations
@@ -1449,7 +1449,7 @@ redis:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: "" # "monitoring"
+      #namespace: "" # "monitoring"
       # -- Prometheus ServiceMonitor labels
       additionalLabels: {}
       # -- Prometheus ServiceMonitor annotations
@@ -1979,7 +1979,7 @@ server:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: ""  # monitoring
+      #namespace: ""  # monitoring
       # -- Prometheus ServiceMonitor labels
       additionalLabels: {}
       # -- Prometheus ServiceMonitor annotations
@@ -2533,7 +2533,7 @@ repoServer:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: "" # "monitoring"
+      #namespace: "" # "monitoring"
       # -- Prometheus ServiceMonitor labels
       additionalLabels: {}
       # -- Prometheus ServiceMonitor annotations
@@ -2683,7 +2683,7 @@ applicationSet:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: ""  # monitoring
+      #namespace: ""  # monitoring
       # -- Prometheus ServiceMonitor labels
       additionalLabels: {}
       # -- Prometheus ServiceMonitor annotations
